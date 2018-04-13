@@ -113,6 +113,7 @@ public class Login extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.getValue()!=null)
+                                            //TEST
                                             {
                                                 Log.d(TAG, "Is a regular user");
                                                 Intent i = new Intent(Login.this, RegularFirstPage.class);
