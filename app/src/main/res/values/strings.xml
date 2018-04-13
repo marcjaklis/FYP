@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FYPGymApp</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">Submit</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="fitness_center_name">Fitness Center Name</string>
+    <string name="admin_sign_up">Admin Sign Up</string>
+    <string name="different_password">Different password</string>
+    <string name="email_already_used">Email already used</string>
+</resources>
