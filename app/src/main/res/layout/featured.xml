@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context="com.example.fypgymapp.categories">
+    tools:context="com.example.fypgymapp.featured">
 
 
     <TextView
@@ -14,47 +14,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-        android:text="Categories"
+        android:text="Featured"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/yogacateg"
+        android:id="@+id/yogabest"
         android:layout_width="340dp"
-        android:layout_height="92dp"
+        android:layout_height="120dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/yogacategories"
+        android:background="@drawable/bestofyoga"
         android:layout_below="@+id/categories"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/bodybuilding"
+        android:id="@+id/topgyms"
         android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="132dp"
-        android:background="@drawable/bodybuildingcategories"
+        android:layout_height="225dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/toptengyms"
         android:layout_below="@+id/categories"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/boxing"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="234dp"
-        android:background="@drawable/boxingcategories"
-        android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/calist"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="336dp"
-        android:background="@drawable/calisthenicscategories"
-        android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
 
 
 
