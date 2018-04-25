@@ -33,10 +33,10 @@
         android:id="@+id/topgyms"
         android:layout_width="340dp"
         android:layout_height="225dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="11dp"
         android:background="@drawable/toptengyms"
-        android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/yogabest"
+        android:layout_alignStart="@+id/yogabest" />
 
 
 

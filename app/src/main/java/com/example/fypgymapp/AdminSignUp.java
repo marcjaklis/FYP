@@ -66,7 +66,7 @@ public class AdminSignUp extends AppCompatActivity {
                 }
 
                 ////////////// Upload to Firebase ///////
-                AdminUser adminUser = new AdminUser(UID, firstName, lastName, fitnessCenterName, location, description);
+                AdminUser adminUser = new AdminUser(UID, firstName, lastName, fitnessCenterName, location, description, 0);
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance()
                         .getReference("adminUsers");

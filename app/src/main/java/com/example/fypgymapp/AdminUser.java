@@ -11,17 +11,20 @@ public class AdminUser {
     public String fitnessCenterName;
     public String location;
     public String description;
+    public int score;
 
 
     public AdminUser(){}
 
-    public AdminUser(String uID, String firstName, String lastName, String fitnessCenterName, String location, String description) {
+
+    public AdminUser(String uID, String firstName, String lastName, String fitnessCenterName, String location, String description, int score) {
         this.uID = uID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.fitnessCenterName = fitnessCenterName;
         this.location = location;
         this.description = description;
+        this.score = score;
     }
 
     public String getuID() {
@@ -38,6 +41,14 @@ public class AdminUser {
 
     public void setFitnessCenterName(String fitnessCenterName) {
         this.fitnessCenterName = fitnessCenterName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getLocation() {
