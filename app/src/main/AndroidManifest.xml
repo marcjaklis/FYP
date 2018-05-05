@@ -24,7 +24,15 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Login" />
         <activity android:name=".RegularFirstPage" />
-        <activity android:name=".AdminFirstPage"></activity>
+        <activity android:name=".AdminFirstPage" />
+        <activity
+            android:name=".Featured"
+            android:label="@string/title_activity_featured"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Categories"
+            android:label="@string/title_activity_categories"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

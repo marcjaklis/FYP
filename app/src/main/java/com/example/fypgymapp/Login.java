@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity {
                                             //TEST
                                             {
                                                 Log.d(TAG, "Is a regular user");
-                                                Intent i = new Intent(Login.this, RegularFirstPage.class);
+                                                Intent i = new Intent(Login.this, Featured.class);
                                                 startActivity(i);
                                             }
                                             else
