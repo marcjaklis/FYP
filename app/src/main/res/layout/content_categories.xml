@@ -21,40 +21,13 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp" />
 
-    <Button
-        android:id="@+id/yogacateg"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/yogacategories"
+    <ListView
+        android:id="@+id/categoriesList"
         android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/bodybuilding"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="132dp"
-        android:background="@drawable/bodybuildingcategories"
-        android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/boxing"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="234dp"
-        android:background="@drawable/boxingcategories"
-        android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/calist"
-        android:layout_width="340dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="336dp"
-        android:background="@drawable/calisthenicscategories"
-        android:layout_below="@+id/categories"
+        android:layout_width="match_parent"
+        android:layout_height="495dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

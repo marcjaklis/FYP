@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Categories extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +32,12 @@ public class Categories extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar=null;
+
+
+
+    private final String TAG = "Ryan";
+    DatabaseReference databaseReference;
+    public ArrayList<MyCategory> myCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +55,78 @@ public class Categories extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
+
+
+
+        ///////// Generate list of Categories /////////
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Categories");
+        myCategories = new ArrayList<MyCategory>();
+        databaseReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Get map of categories in datasnapshot
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                        {
+                            String name;
+                            name = snapshot.child("name").getValue().toString();
+                            Log.d(TAG, "Name is: " +name);
+                            String url;
+                            url = snapshot.child("image").getValue().toString();
+                            Log.d(TAG, "Link is: " +url);
+
+                            MyCategory temp = new MyCategory(url, name);
+                            myCategories.add(temp);
+                        }
+                        ///////////// Code to convert ArrayList to Array of MyCategory
+                        assert myCategories != null;
+                        MyCategory[] list = new MyCategory[myCategories.size()];
+                        Log.i(TAG, "Size of Array is: " + Integer.toString(myCategories.size()));
+                        myCategories.toArray(list);
+
+
+                        /// Now generate the list of Imagebuttons
+                        ListAdapter myAdapter = new CustomAdapterCategories(Categories.this,list);
+                        android.widget.ListView myList = (android.widget.ListView) findViewById(R.id.categoriesList);
+                        myList.setAdapter(myAdapter);
+
+                        myList.setOnItemClickListener(
+                                new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        MyCategory temporary = (MyCategory) parent.getItemAtPosition(position);
+                                        String name = temporary.name;
+                                        Toast.makeText(Categories.this, name, Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                        );
+
+
+
+                    }
+
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////
     }
 
     @Override
