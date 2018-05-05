@@ -29,8 +29,10 @@ public class Featured extends AppCompatActivity
 
 
 
-    private Button topGyms;
+    private ImageButton topGyms;
     private ImageButton yogaBest;
+    private String firstString;
+    private String secondString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,20 @@ public class Featured extends AppCompatActivity
 
 
 
-        topGyms = (Button) findViewById(R.id.topgyms);
+        topGyms = (ImageButton) findViewById(R.id.topgyms);
         yogaBest = (ImageButton) findViewById(R.id.yogabest);
         yogaBest.setBackground(null);
-        Picasso.with(this).load("https://firebasestorage.googleapis.com/v0/b/fyptest2-38a21.appspot.com/o/bestofyoga.png?alt=media&token=8b19f30e-30ae-46a9-984b-b7b968eece44")
+        topGyms.setBackground(null);
+        firstString = "https://firebasestorage.googleapis.com/v0/b/fyptest2-38a21.appspot.com/o/" +
+                "bestofyoga.png?alt=media&token=8b19f30e-30ae-46a9-984b-b7b968eece44";
+        Picasso.with(this).load(firstString)
                 .placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(yogaBest);
+
+        secondString = "https://firebasestorage.googleapis.com/v0/b/fyptest2-38a21.appspot.com/o/" +
+                "toptengyms.png?alt=media&token=d99e68fd-b197-4771-902d-8dabea72a970";
+
+        Picasso.with(this).load(secondString)
+                .placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(topGyms);
     }
 
     @Override
