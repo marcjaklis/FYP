@@ -38,6 +38,7 @@ public class Categories extends AppCompatActivity
     private final String TAG = "Ryan";
     DatabaseReference databaseReference;
     public ArrayList<MyCategory> myCategories;
+    android.widget.ListView myList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,13 @@ public class Categories extends AppCompatActivity
                             url = snapshot.child("image").getValue().toString();
                             Log.d(TAG, "Link is: " +url);
 
-                            MyCategory temp = new MyCategory(url, name);
+
+                            String urlBigPicture;
+                            urlBigPicture = snapshot.child("bigimage").getValue().toString();
+
+
+
+                            MyCategory temp = new MyCategory(name, url, urlBigPicture);
                             myCategories.add(temp);
                         }
                         ///////////// Code to convert ArrayList to Array of MyCategory
@@ -93,19 +100,8 @@ public class Categories extends AppCompatActivity
 
                         /// Now generate the list of Imagebuttons
                         ListAdapter myAdapter = new CustomAdapterCategories(Categories.this,list);
-                        android.widget.ListView myList = (android.widget.ListView) findViewById(R.id.categoriesList);
+                        myList = (android.widget.ListView) findViewById(R.id.categoriesList);
                         myList.setAdapter(myAdapter);
-
-                        myList.setOnItemClickListener(
-                                new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        MyCategory temporary = (MyCategory) parent.getItemAtPosition(position);
-                                        String name = temporary.name;
-                                        Toast.makeText(Categories.this, name, Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                        );
 
 
 
@@ -118,6 +114,18 @@ public class Categories extends AppCompatActivity
                         //handle databaseError
                     }
                 });
+
+        /* myList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d(TAG,"Is Clicked");
+                        MyCategory temporary = (MyCategory) parent.getItemAtPosition(position);
+                        String name = temporary.name;
+                        Toast.makeText(Categories.this, "Name is: "+name, Toast.LENGTH_LONG).show();
+                    }
+                }
+        );*/
 
 
 

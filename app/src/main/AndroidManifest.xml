@@ -32,6 +32,10 @@
         <activity
             android:name=".Categories"
             android:label="@string/title_activity_categories"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DisplayClassesFromCategories"
+            android:label="@string/title_activity_display_classes_from_categories"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

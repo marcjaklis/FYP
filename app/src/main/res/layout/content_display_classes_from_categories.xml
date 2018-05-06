@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.fypgymapp.DisplayClassesFromCategories"
+    tools:showIn="@layout/app_bar_display_classes_from_categories"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/CategoryPic"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/bodybuildingfeatured" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/CategoryPic"
+        android:id="@+id/relativeLayout">
+
+
+
+        <Button
+            android:id="@+id/popularButton"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/near_you"
+            android:textSize="10sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="70dp" />
+
+        <Button
+            android:id="@+id/nearYouButton"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/popular"
+            android:layout_marginStart="70dp"
+            android:textSize="10sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:text="M"
+            android:id="@+id/monday"
+            android:layout_below="@+id/popularButton"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:text="T"
+            android:id="@+id/tuesday"
+            android:layout_below="@+id/popularButton"
+            android:layout_toRightOf="@+id/monday" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:text="W"
+            android:id="@+id/wednesday"
+            android:layout_below="@+id/popularButton"
+            android:layout_toRightOf="@+id/tuesday" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:text="R"
+            android:id="@+id/thursday"
+            android:layout_below="@+id/popularButton"
+            android:layout_toRightOf="@+id/wednesday" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:text="F"
+            android:id="@+id/friday"
+            android:layout_below="@+id/popularButton"
+            android:layout_toRightOf="@+id/thursday" />
+
+
+    </RelativeLayout>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout" />
+
+</RelativeLayout>
