@@ -12,9 +12,11 @@ public class ParentClass implements ParentObject {
     /* Create an instance variable for your list of children */
     private List<Object> mChildrenList;
     private String title;
+    public String dateAndTime;
 
-    public ParentClass(String title) {
+    public ParentClass(String title, String dateAndTime) {
         this.title = title;
+        this.dateAndTime = dateAndTime;
     }
 
     public String getTitle() {
@@ -23,6 +25,14 @@ public class ParentClass implements ParentObject {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(String dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 
     /**

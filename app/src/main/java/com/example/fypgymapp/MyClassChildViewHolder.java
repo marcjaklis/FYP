@@ -12,9 +12,7 @@ import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 
 public class MyClassChildViewHolder extends ChildViewHolder {
 
-    public TextView time;
     public TextView instructor;
-    public TextView days;
     public TextView remainingSeats;
     public Button reserve;
 
@@ -22,9 +20,7 @@ public class MyClassChildViewHolder extends ChildViewHolder {
     public MyClassChildViewHolder(View itemView) {
         super(itemView);
 
-        time = (TextView) itemView.findViewById(R.id.time);
         instructor = (TextView) itemView.findViewById(R.id.instructor);
-        days = (TextView) itemView.findViewById(R.id.days);
         remainingSeats = (TextView) itemView.findViewById(R.id.remainingseats);
         reserve = (Button) itemView.findViewById(R.id.reserve);
 

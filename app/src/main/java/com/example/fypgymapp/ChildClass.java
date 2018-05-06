@@ -10,25 +10,12 @@ import java.sql.Time;
 
 public class ChildClass {
 
-    private String time;
     private String instructor;
-    private String days;
     private int remainingSeats;
-    private Button reserve;
 
-    public ChildClass(String time, String instructor, String days, int remainingSeats) {
-        this.time = time;
+    public ChildClass(String instructor, int remainingSeats) {
         this.instructor = instructor;
-        this.days = days;
         this.remainingSeats = remainingSeats;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getInstructor() {
@@ -39,14 +26,6 @@ public class ChildClass {
         this.instructor = instructor;
     }
 
-    public String getDays() {
-        return days;
-    }
-
-    public void setDays(String days) {
-        this.days = days;
-    }
-
     public int getRemainingSeats() {
         return remainingSeats;
     }
@@ -55,11 +34,4 @@ public class ChildClass {
         this.remainingSeats = remainingSeats;
     }
 
-    public Button getReserve() {
-        return reserve;
-    }
-
-    public void setReserve(Button reserve) {
-        this.reserve = reserve;
-    }
 }

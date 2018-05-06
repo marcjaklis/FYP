@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
 
         sendData = (Button) findViewById(R.id.temp);
         key =addClass();
@@ -44,10 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 reserveSeat(myRef);
             }
         });
-
-
+        */
     }
-
+/*
     public String addClass ()
     {
         MyGymClass myGymClass = new MyGymClass("Friday", "Pilates", "8:30 p.m.",
@@ -95,5 +95,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+*/
 }

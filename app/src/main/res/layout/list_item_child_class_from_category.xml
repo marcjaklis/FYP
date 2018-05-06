@@ -13,43 +13,24 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="38dp" />
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time: "
-        android:layout_below="@+id/instructor"
-        android:layout_marginStart="16dp"
-         />
-
-
 
     <TextView
         android:id="@+id/remainingseats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
         android:text="Remaining Seats: "
-        android:layout_alignBaseline="@+id/time"
-        android:layout_alignBottom="@+id/time"
-        android:layout_toRightOf="@+id/time"/>
-
-    <TextView
-        android:id="@+id/days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Days: "
         android:layout_alignBaseline="@+id/instructor"
         android:layout_alignBottom="@+id/instructor"
-        android:layout_alignEnd="@+id/remainingseats"
-        android:layout_marginEnd="22dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="68dp" />
 
     <Button
         android:id="@+id/reserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="22dp"
         android:text="Reserve now"
         android:layout_below="@+id/remainingseats"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginStart="35dp"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

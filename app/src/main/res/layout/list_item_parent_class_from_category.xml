@@ -11,6 +11,14 @@
         android:textStyle="bold"
         android:text="BlaBla at BlaBla" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/parent_list_item_day_and_time"
+        android:layout_toEndOf="@+id/parent_list_item_crime_title_text_view"
+        android:text="Monday 3-4"
+        android:padding="16dp"/>
+
     <ImageButton
         android:id="@+id/parent_list_item_expand_arrow"
         android:layout_width="wrap_content"

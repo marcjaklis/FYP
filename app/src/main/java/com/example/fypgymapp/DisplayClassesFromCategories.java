@@ -20,6 +20,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -87,14 +92,39 @@ public class DisplayClassesFromCategories extends AppCompatActivity
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /////   Create Sample Classes ////////
+        /////   Get List of classes for the Category ////////
 
         ArrayList<ParentObject> parentObjects = new ArrayList<>();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child("Classes").child(categoryName);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot:dataSnapshot.getChildren())
+                {
+                    Log.d(TAG,"In Child");
+                    MyGymClass myGymClass =snapshot.getValue(MyGymClass.class);
+                    if (myGymClass==null)
+                        Log.d(TAG,"GymClass is null");
+                    else
+                    {
+                        Log.d(TAG,"Class Name: "+myGymClass.title);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         for (int i=0; i<7; i++)
         {
             ArrayList<Object> childList = new ArrayList<>();
-            ParentClass parentClass = new ParentClass("Class Number: " + String.valueOf(i+1));
-            ChildClass childClass = new ChildClass("10-11", "Ryan", "MWF", i+10);
+            ParentClass parentClass = new ParentClass("Class Number: " + String.valueOf(i+1), "Monday: 3-4");
+            ChildClass childClass = new ChildClass("Ryan Chedrawi", i+10);
             childList.add(childClass);
             parentClass.setChildObjectList(childList);
             parentObjects.add(parentClass);

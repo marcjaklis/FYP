@@ -10,27 +10,24 @@ import java.util.Map;
 public class MyGymClass {
 
     public String classDays;
-    public String classType;
-    public String endTime;
     public String facility;
     public String instructor;
-    public double remainingSeats;
-    public String startTime;
+    public int remainingSeats;
+    public String time;
+    public String title;
+
+
 
     public MyGymClass(){}
 
-    public MyGymClass(String classDays, String classType, String endTime, String facility,
-                      String instructor, double remainingSeats, String startTime)
-    {
-        this.startTime=startTime;
-        this.endTime=endTime;
-        this.instructor=instructor;
-        this.classType=classType;
-        this.facility=facility;
-        this.remainingSeats=remainingSeats;
-        this.classDays=classDays;
+    public MyGymClass(String classDays, String facility, String instructor, int remainingSeats, String time, String title) {
+        this.classDays = classDays;
+        this.facility = facility;
+        this.instructor = instructor;
+        this.remainingSeats = remainingSeats;
+        this.time = time;
+        this.title = title;
     }
-
 
     public String getClassDays() {
         return classDays;
@@ -38,22 +35,6 @@ public class MyGymClass {
 
     public void setClassDays(String classDays) {
         this.classDays = classDays;
-    }
-
-    public String getClassType() {
-        return classType;
-    }
-
-    public void setClassType(String classType) {
-        this.classType = classType;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getFacility() {
@@ -72,19 +53,27 @@ public class MyGymClass {
         this.instructor = instructor;
     }
 
-    public double getRemainingSeats() {
+    public int getRemainingSeats() {
         return remainingSeats;
     }
 
-    public void setRemainingSeats(double remainingSeats) {
+    public void setRemainingSeats(int remainingSeats) {
         this.remainingSeats = remainingSeats;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getTime() {
+        return time;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

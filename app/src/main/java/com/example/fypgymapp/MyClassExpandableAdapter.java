@@ -46,6 +46,7 @@ public class MyClassExpandableAdapter extends ExpandableRecyclerAdapter<MyClassP
 
         ParentClass parentClass = (ParentClass) o;
         myClassParentViewHolder.title.setText(parentClass.getTitle());
+        myClassParentViewHolder.dateAndTime.setText(parentClass.getDateAndTime());
         Log.d(TAG2, "MyClassExpandableAdapter onBindParentViewHolder called" );
     }
 
@@ -53,9 +54,7 @@ public class MyClassExpandableAdapter extends ExpandableRecyclerAdapter<MyClassP
     public void onBindChildViewHolder(MyClassChildViewHolder myClassChildViewHolder, int i, Object o) {
         ChildClass childClass = (ChildClass) o;
         myClassChildViewHolder.instructor.setText(childClass.getInstructor());
-        myClassChildViewHolder.days.setText(childClass.getDays());
         myClassChildViewHolder.remainingSeats.setText(String.valueOf(childClass.getRemainingSeats()));
-        myClassChildViewHolder.time.setText(childClass.getTime());
 
         Log.d(TAG2, "MyClassExpandableAdapter onBindParentViewHolder called" );
 

@@ -13,12 +13,14 @@ import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 public class MyClassParentViewHolder extends ParentViewHolder {
 
     public TextView title;
+    public TextView dateAndTime;
     public ImageButton dropDownArrow;
 
     public MyClassParentViewHolder(View itemView) {
         super(itemView);
 
         title = (TextView) itemView.findViewById(R.id.parent_list_item_crime_title_text_view);
+        dateAndTime = (TextView) itemView.findViewById(R.id.parent_list_item_day_and_time);
         dropDownArrow = (ImageButton) itemView.findViewById(R.id.parent_list_item_expand_arrow);
     }
 }
