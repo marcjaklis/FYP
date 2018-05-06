@@ -54,7 +54,7 @@ public class MyClassExpandableAdapter extends ExpandableRecyclerAdapter<MyClassP
     public void onBindChildViewHolder(MyClassChildViewHolder myClassChildViewHolder, int i, Object o) {
         ChildClass childClass = (ChildClass) o;
         myClassChildViewHolder.instructor.setText(childClass.getInstructor());
-        myClassChildViewHolder.remainingSeats.setText(String.valueOf(childClass.getRemainingSeats()));
+        myClassChildViewHolder.remainingSeats.setText(childClass.getRemainingSeats());
 
         Log.d(TAG2, "MyClassExpandableAdapter onBindParentViewHolder called" );
 

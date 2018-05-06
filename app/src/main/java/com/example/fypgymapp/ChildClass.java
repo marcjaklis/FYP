@@ -11,9 +11,9 @@ import java.sql.Time;
 public class ChildClass {
 
     private String instructor;
-    private int remainingSeats;
+    private String remainingSeats;
 
-    public ChildClass(String instructor, int remainingSeats) {
+    public ChildClass(String instructor, String remainingSeats) {
         this.instructor = instructor;
         this.remainingSeats = remainingSeats;
     }
@@ -26,11 +26,11 @@ public class ChildClass {
         this.instructor = instructor;
     }
 
-    public int getRemainingSeats() {
+    public String getRemainingSeats() {
         return remainingSeats;
     }
 
-    public void setRemainingSeats(int remainingSeats) {
+    public void setRemainingSeats(String remainingSeats) {
         this.remainingSeats = remainingSeats;
     }
 
