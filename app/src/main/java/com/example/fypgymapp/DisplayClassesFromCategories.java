@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+
+import java.util.ArrayList;
+
 public class DisplayClassesFromCategories extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,6 +28,9 @@ public class DisplayClassesFromCategories extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar=null;
     ////////////// End Of For Navigation /////////
+
+
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +48,35 @@ public class DisplayClassesFromCategories extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        /////   Create Sample Classes ////////
+
+        ArrayList<ParentObject> parentObjects = new ArrayList<>();
+        for (int i=0; i<7; i++)
+        {
+            ArrayList<Object> childList = new ArrayList<>();
+            ParentClass parentClass = new ParentClass("Class Number: " + String.valueOf(i+1));
+            ChildClass childClass = new ChildClass("10-11", "Ryan", "MWF", i+10);
+            childList.add(childClass);
+            parentClass.setChildObjectList(childList);
+            parentObjects.add(parentClass);
+        }
+
+        MyClassExpandableAdapter myClassExpandableAdapter = new MyClassExpandableAdapter(DisplayClassesFromCategories.this,
+                parentObjects);
+        myClassExpandableAdapter.setCustomParentAnimationViewId(R.id.parent_list_item_expand_arrow);
+        myClassExpandableAdapter.setParentClickableViewAnimationDefaultDuration();
+        myClassExpandableAdapter.setParentAndIconExpandOnClick(true);
+        recyclerView.setAdapter(myClassExpandableAdapter);
+        //////////// Done with Sample Classes /////////////////////
     }
 
     @Override
