@@ -1,11 +1,13 @@
 package com.example.fypgymapp;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,8 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,6 +33,12 @@ public class DisplayClassesFromCategories extends AppCompatActivity
     Toolbar toolbar=null;
     ////////////// End Of For Navigation /////////
 
+
+    public final String TAG="Ryan";
+
+    public String imageURL;
+    public String categoryName;
+    public ImageView imageView;
 
     RecyclerView recyclerView;
 
@@ -50,10 +60,30 @@ public class DisplayClassesFromCategories extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        /////////////////// Load proper image //////////////////
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null)
+        {
+            imageURL = extras.getString("url");
+            categoryName = extras.getString("name");
+            Log.d(TAG,"Extras not null, imageURL is: "+imageURL);
+            Log.d(TAG, "Category is: " +categoryName);
+        }
+        else{
+            Log.d(TAG, "Extras is null");
+        }
+        imageView = (ImageView) findViewById(R.id.CategoryPic);
+
+        Picasso.with(DisplayClassesFromCategories.this).load(imageURL)
+                .placeholder(R.mipmap.ic_launcher).fit().centerCrop().into(imageView);
+
+
+        /////////////////// End of Load proper image ///////////
 
 
 
 
+        ///////////////// Display List Of Classes in Recycler View //////////////
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,6 +107,7 @@ public class DisplayClassesFromCategories extends AppCompatActivity
         myClassExpandableAdapter.setParentAndIconExpandOnClick(true);
         recyclerView.setAdapter(myClassExpandableAdapter);
         //////////// Done with Sample Classes /////////////////////
+        //////////// Done with List of Classes In recycler View ///////////////
     }
 
     @Override

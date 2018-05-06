@@ -41,6 +41,8 @@ public class CustomAdapterCategories extends ArrayAdapter<MyCategory> {
         final MyCategory current = getItem(position);
 
         String url=current.url;
+        final String urlBigPicture = current.urlBigPicture;
+        final String name = current.name;
 
 
         imageButton.setBackground(null);
@@ -54,6 +56,8 @@ public class CustomAdapterCategories extends ArrayAdapter<MyCategory> {
 
                 Log.d(TAG,current.name + " is Clicked");
                 Intent i = new Intent(getContext().getApplicationContext(), DisplayClassesFromCategories.class);
+                i.putExtra("url",urlBigPicture);
+                i.putExtra("name", name);
                 getContext().getApplicationContext().startActivity(i);
 
             }
