@@ -12,6 +12,7 @@ public class ChildClass {
 
     private String instructor;
     private String remainingSeats;
+    public MyGymClass myGymClass;
 
     public ChildClass(String instructor, String remainingSeats) {
         this.instructor = instructor;
@@ -34,4 +35,11 @@ public class ChildClass {
         this.remainingSeats = remainingSeats;
     }
 
+    public MyGymClass getMyGymClass() {
+        return myGymClass;
+    }
+
+    public void setMyGymClass(MyGymClass myGymClass) {
+        this.myGymClass = myGymClass;
+    }
 }

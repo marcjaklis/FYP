@@ -263,6 +263,7 @@ public class DisplayClassesFromCategories extends AppCompatActivity
                 ParentClass parentClass = new ParentClass(newTitle,dateAndTime);
                 ChildClass childClass = new ChildClass("Instructor: "+myGymClass.instructor,
                         "Remaining seats: " + myGymClass.remainingSeats);
+                childClass.myGymClass=myGymClass;
                 childList.add(childClass);
                 parentClass.setChildObjectList(childList);
                 parentObjects.add(parentClass);

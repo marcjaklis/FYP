@@ -16,6 +16,21 @@ public class MyGymClass {
     public String time;
     public String title;
 
+    public boolean isEqualTo (MyGymClass b)
+    {
+        if (!this.classDays.equals(b.classDays))
+            return false;
+        if (!this.facility.equals(b.facility))
+            return false;
+        if (!this.instructor.equals(b.instructor))
+            return false;
+        if (!this.time.equals(b.time))
+            return false;
+        if (!this.title.equals(b.title))
+            return false;
+
+        return true;
+    }
 
 
     public MyGymClass(){}
