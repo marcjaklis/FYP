@@ -23,4 +23,5 @@
     </string>
     <string name="popular">Popular</string>
     <string name="near_you">Near You</string>
+    <string name="title_activity_registered_classes">RegisteredClasses</string>
 </resources>

@@ -28,6 +28,7 @@ public class MyClassChildViewHolder extends ChildViewHolder {
     public TextView remainingSeats;
     public Button reserve;
     public MyGymClass myGymClass;
+    public String category;
     final public String TAG="Ryan";
     final public String TAG2="Hello";
 
@@ -63,6 +64,22 @@ public class MyClassChildViewHolder extends ChildViewHolder {
         String uid = user.getUid();
         databaseReference.child(uid).push().setValue(myGymClass);
         Log.d(TAG,"Uploaded User");
+    }
+
+    public void checkIfFull()
+    {
+
+        Log.d(TAG2,"In checkIfUserRegistered");
+        Log.d("TempTest","Title: " +myGymClass.title);
+        if (this.myGymClass.remainingSeats==0)
+        {
+            Log.d("TempTest", "Changing Button To Full");
+            reserve.setText("Class Is Full");
+            reserve.setBackgroundColor(Color.GRAY);
+            reserve.setOnClickListener(null);
+            Log.d(TAG2,"Button Changed because full");
+        }
+
     }
 
     public void checkIfUserRegistered()
@@ -111,5 +128,13 @@ public class MyClassChildViewHolder extends ChildViewHolder {
 
     public void setMyGymClass(MyGymClass myGymClass) {
         this.myGymClass = myGymClass;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

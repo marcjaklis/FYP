@@ -55,9 +55,13 @@ public class MyClassExpandableAdapter extends ExpandableRecyclerAdapter<MyClassP
         ChildClass childClass = (ChildClass) o;
         myClassChildViewHolder.instructor.setText(childClass.getInstructor());
         myClassChildViewHolder.remainingSeats.setText(childClass.getRemainingSeats());
+
+        myClassChildViewHolder.setCategory(childClass.getCategory());
         myClassChildViewHolder.setMyGymClass(childClass.getMyGymClass());
+
+        myClassChildViewHolder.checkIfFull();
         myClassChildViewHolder.checkIfUserRegistered();
-        Log.d(TAG2, "MyClassExpandableAdapter onBindParentViewHolder called" );
+        Log.d("TempTest", "MyClassExpandableAdapter onBindParentViewHolder called" );
 
     }
 }

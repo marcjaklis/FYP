@@ -264,6 +264,7 @@ public class DisplayClassesFromCategories extends AppCompatActivity
                 ChildClass childClass = new ChildClass("Instructor: "+myGymClass.instructor,
                         "Remaining seats: " + myGymClass.remainingSeats);
                 childClass.myGymClass=myGymClass;
+                childClass.setCategory(categoryName);
                 childList.add(childClass);
                 parentClass.setChildObjectList(childList);
                 parentObjects.add(parentClass);
@@ -326,6 +327,10 @@ public class DisplayClassesFromCategories extends AppCompatActivity
             case R.id.nav_categories:
                 Intent i = new Intent(DisplayClassesFromCategories.this, Categories.class);
                 startActivity(i);
+                break;
+            case R.id.nav_my_classes:
+                Intent j = new Intent(DisplayClassesFromCategories.this, RegisteredClasses.class);
+                startActivity(j);
                 break;
 
         }

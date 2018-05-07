@@ -11,6 +11,11 @@
             android:icon="@drawable/category"
             android:title="@string/categories" />
 
+        <item
+            android:id="@+id/nav_my_classes"
+            android:icon="@drawable/user"
+            android:title="My Classes" />
+
 
 
 </menu>

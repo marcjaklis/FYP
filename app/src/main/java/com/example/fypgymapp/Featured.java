@@ -117,6 +117,10 @@ public class Featured extends AppCompatActivity
                 Intent i = new Intent(Featured.this, Categories.class);
                 startActivity(i);
                 break;
+            case R.id.nav_my_classes:
+                Intent j = new Intent(Featured.this, RegisteredClasses.class);
+                startActivity(j);
+                break;
 
         }
 

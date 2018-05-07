@@ -14,10 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,24 +26,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Categories extends AppCompatActivity
+public class RegisteredClasses extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
+    Toolbar toolbar = null;
 
 
 
     private final String TAG = "Ryan";
     DatabaseReference databaseReference;
-    public ArrayList<MyCategory> myCategories;
+    public ArrayList<MyCategory> myClasses;
     android.widget.ListView myList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        setContentView(R.layout.activity_registered_classes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,57 +65,58 @@ public class Categories extends AppCompatActivity
 
 
 
+        ///////////////// Generate List of Classes ////////////
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("userClasses");
+        myClasses = new ArrayList<MyCategory>();
 
-        ///////// Generate list of Categories /////////
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null)
+        {
+            String uid = user.getUid();
+            databaseReference = databaseReference.child(uid);
+            databaseReference.addValueEventListener(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //Get map of categories in datasnapshot
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                            {
+                                String a,b,c,d,e;
+                                a = snapshot.child("title").getValue().toString();
+                                b = snapshot.child("facility").getValue().toString();
+                                c = snapshot.child("classDays").getValue().toString();
+                                d = snapshot.child("time").getValue().toString();
+                                e = snapshot.child("instructor").getValue().toString();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Categories");
-        myCategories = new ArrayList<MyCategory>();
-        databaseReference.addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Get map of categories in datasnapshot
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                        {
-                            String name;
-                            name = snapshot.child("name").getValue().toString();
-                            Log.d(TAG, "Name is: " +name);
-                            String url;
-                            url = snapshot.child("image").getValue().toString();
-                            Log.d(TAG, "Link is: " +url);
+                                String name = a + " - " + b;
+                                String time = c + ": " + d;
+                                String instructor = "Instructor: " + e;
+
+                                MyCategory temp = new MyCategory(name, time, instructor);
+                                myClasses.add(temp);
+                            }
+                            ///////////// Code to convert ArrayList to Array of MyCategory
+                            assert myClasses != null;
+                            MyCategory[] list = new MyCategory[myClasses.size()];
+                            Log.i(TAG, "Size of Array is: " + Integer.toString(myClasses.size()));
+                            myClasses.toArray(list);
 
 
-                            String urlBigPicture;
-                            urlBigPicture = snapshot.child("bigimage").getValue().toString();
-
-
-
-                            MyCategory temp = new MyCategory(name, url, urlBigPicture);
-                            myCategories.add(temp);
+                            /// Now generate the list of items
+                            ListAdapter myAdapter = new CustomAdapterClasses(RegisteredClasses.this,list);
+                            myList = (android.widget.ListView) findViewById(R.id.list_registered_classes);
+                            myList.setAdapter(myAdapter);
                         }
-                        ///////////// Code to convert ArrayList to Array of MyCategory
-                        assert myCategories != null;
-                        MyCategory[] list = new MyCategory[myCategories.size()];
-                        Log.i(TAG, "Size of Array is: " + Integer.toString(myCategories.size()));
-                        myCategories.toArray(list);
-
-
-                        /// Now generate the list of Imagebuttons
-                        ListAdapter myAdapter = new CustomAdapterCategories(Categories.this,list);
-                        myList = (android.widget.ListView) findViewById(R.id.categoriesList);
-                        myList.setAdapter(myAdapter);
 
 
 
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            //handle databaseError
+                        }
+                    });
+        }
 
-
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
-                });
 
         /////////////////////////////////////////////////
     }
@@ -158,21 +161,21 @@ public class Categories extends AppCompatActivity
 
         switch (id){
             case R.id.nav_featured:
-                Intent h = new Intent(Categories.this, Featured.class);
+                Intent h = new Intent(RegisteredClasses.this, Featured.class);
                 startActivity(h);
                 break;
             case R.id.nav_categories:
-                Intent i = new Intent(Categories.this, Categories.class);
+                Intent i = new Intent(RegisteredClasses.this, Categories.class);
                 startActivity(i);
                 break;
             case R.id.nav_my_classes:
-                Intent j = new Intent(Categories.this, RegisteredClasses.class);
+                Intent j = new Intent(RegisteredClasses.this, RegisteredClasses.class);
                 startActivity(j);
                 break;
 
         }
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
