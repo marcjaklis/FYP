@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,10 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,26 +26,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class RegisteredClasses extends AppCompatActivity
+public class RecommendedClasses extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar = null;
+    Toolbar toolbar=null;
 
 
+    public ArrayList<ParentObject> parentObjects;
+    public ArrayList<MyGymClass> gymClassArrayList;
+    RecyclerView recyclerView;
 
-    private final String TAG = "Ryan";
-    DatabaseReference databaseReference;
-    public ArrayList<MyCategory> myClasses;
-    android.widget.ListView myList;
-
-
+    public final String TAG="Ryan";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registered_classes);
+        setContentView(R.layout.activity_recommended_classes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -60,65 +58,72 @@ public class RegisteredClasses extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        gymClassArrayList = new ArrayList<MyGymClass>();
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child("Classes").child("bodybuilding");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot:dataSnapshot.getChildren())
+                {
+                    Log.d(TAG,"In Child");
+                    MyGymClass myGymClass =snapshot.getValue(MyGymClass.class);
+                    if (myGymClass==null)
+                        Log.d(TAG,"GymClass is null");
+                    else
+                    {
+                        gymClassArrayList.add(myGymClass);
+                    }
+                    displayAdapter();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
+    void displayAdapter() {
 
-
-
-        ///////////////// Generate List of Classes ////////////
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("userClasses");
-        myClasses = new ArrayList<MyCategory>();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null)
+        parentObjects = new ArrayList<>();
+        for (int i=0; i<gymClassArrayList.size(); i++)
         {
-            String uid = user.getUid();
-            databaseReference = databaseReference.child(uid);
-            databaseReference.addValueEventListener(
-                    new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            //Get map of categories in datasnapshot
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                            {
-                                String a,b,c,d,e;
-                                a = snapshot.child("title").getValue().toString();
-                                b = snapshot.child("facility").getValue().toString();
-                                c = snapshot.child("classDays").getValue().toString();
-                                d = snapshot.child("time").getValue().toString();
-                                e = snapshot.child("instructor").getValue().toString();
-
-                                String name = a + " - " + b;
-                                String time = c + ": " + d;
-                                String instructor = "Instructor: " + e;
-
-                                MyCategory temp = new MyCategory(name, time, instructor);
-                                myClasses.add(temp);
-                            }
-                            ///////////// Code to convert ArrayList to Array of MyCategory
-                            assert myClasses != null;
-                            MyCategory[] list = new MyCategory[myClasses.size()];
-                            Log.i(TAG, "Size of Array is: " + Integer.toString(myClasses.size()));
-                            myClasses.toArray(list);
+            boolean allow=true;
+            MyGymClass myGymClass=gymClassArrayList.get(i);
 
 
-                            /// Now generate the list of items
-                            ListAdapter myAdapter = new CustomAdapterClasses(RegisteredClasses.this,list);
-                            myList = (android.widget.ListView) findViewById(R.id.list_registered_classes);
-                            myList.setAdapter(myAdapter);
-                        }
-
-
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            //handle databaseError
-                        }
-                    });
+            if (allow)
+            {
+                Log.d(TAG,"Class Name: "+myGymClass.title);
+                ArrayList<Object> childList = new ArrayList<>();
+                String newTitle = myGymClass.title + " - " + myGymClass.facility;
+                String dateAndTime = myGymClass.classDays + ": " + myGymClass.time;
+                ParentClass parentClass = new ParentClass(newTitle,dateAndTime);
+                ChildClass childClass = new ChildClass("Instructor: "+myGymClass.instructor,
+                        "Remaining seats: " + myGymClass.remainingSeats);
+                childClass.myGymClass=myGymClass;
+                childClass.setCategory("boxing");
+                childList.add(childClass);
+                parentClass.setChildObjectList(childList);
+                parentObjects.add(parentClass);
+            }
         }
 
 
-        /////////////////////////////////////////////////
+        MyClassExpandableAdapter myClassExpandableAdapter = new MyClassExpandableAdapter(RecommendedClasses.this,
+                parentObjects);
+        myClassExpandableAdapter.setCustomParentAnimationViewId(R.id.parent_list_item_expand_arrow);
+        myClassExpandableAdapter.setParentClickableViewAnimationDefaultDuration();
+        myClassExpandableAdapter.setParentAndIconExpandOnClick(true);
+        recyclerView.setAdapter(myClassExpandableAdapter);
+
     }
 
     @Override
@@ -159,25 +164,25 @@ public class RegisteredClasses extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        switch (id) {
+        switch (id){
             case R.id.nav_featured:
-                Intent h = new Intent(RegisteredClasses.this, Featured.class);
+                Intent h = new Intent(RecommendedClasses.this, Featured.class);
                 startActivity(h);
                 break;
             case R.id.nav_categories:
-                Intent i = new Intent(RegisteredClasses.this, Categories.class);
+                Intent i = new Intent(RecommendedClasses.this, Categories.class);
                 startActivity(i);
                 break;
             case R.id.nav_my_classes:
-                Intent j = new Intent(RegisteredClasses.this, RegisteredClasses.class);
+                Intent j = new Intent(RecommendedClasses.this, RegisteredClasses.class);
                 startActivity(j);
                 break;
             case R.id.nav_search:
-                Intent k = new Intent(RegisteredClasses.this, GymSearch.class);
+                Intent k = new Intent(RecommendedClasses.this, GymSearch.class);
                 startActivity(k);
                 break;
-        }
 
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

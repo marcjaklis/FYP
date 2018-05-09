@@ -3,6 +3,8 @@
     package="com.example.fypgymapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -40,6 +42,19 @@
         <activity
             android:name=".RegisteredClasses"
             android:label="@string/title_activity_registered_classes"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBn0p1H153Q9M7lTiVdYkH4UamFXSzbcrU" />
+
+        <activity
+            android:name=".GymSearch"
+            android:label="@string/title_activity_gym_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecommendedClasses"
+            android:label="@string/title_activity_recommended_classes"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

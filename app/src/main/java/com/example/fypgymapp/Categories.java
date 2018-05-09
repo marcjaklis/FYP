@@ -169,6 +169,10 @@ public class Categories extends AppCompatActivity
                 Intent j = new Intent(Categories.this, RegisteredClasses.class);
                 startActivity(j);
                 break;
+            case R.id.nav_search:
+                Intent k = new Intent(Categories.this, GymSearch.class);
+                startActivity(k);
+                break;
 
         }
 

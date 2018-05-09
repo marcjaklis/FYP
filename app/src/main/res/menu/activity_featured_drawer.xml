@@ -16,6 +16,13 @@
             android:icon="@drawable/user"
             android:title="My Classes" />
 
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/searchbylocation"
+            android:title="Search for Fitness Centers" />
+
+
+
 
 
 </menu>

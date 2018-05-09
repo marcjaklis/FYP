@@ -10,6 +10,8 @@ public class AdminUser {
     public String lastName;
     public String fitnessCenterName;
     public String location;
+    public double latitude;
+    public double longitude;
     public String description;
     public int score;
 
@@ -17,12 +19,15 @@ public class AdminUser {
     public AdminUser(){}
 
 
-    public AdminUser(String uID, String firstName, String lastName, String fitnessCenterName, String location, String description, int score) {
+    public AdminUser(String uID, String firstName, String lastName, String fitnessCenterName, double latitude, double longitude,
+                     String location, String description, int score) {
         this.uID = uID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.fitnessCenterName = fitnessCenterName;
         this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.description = description;
         this.score = score;
     }

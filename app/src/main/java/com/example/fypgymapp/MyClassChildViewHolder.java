@@ -103,14 +103,14 @@ public class MyClassChildViewHolder extends ChildViewHolder {
                         {
                             Log.d(TAG2,"Checking First Class");
                             MyGymClass temp = snapshot.getValue(MyGymClass.class);
-                            if (temp.isEqualTo(myGymClass)) {
+                            /*if (temp.isEqualTo(myGymClass)) {
                                 Log.d(TAG2,"User Registered Class");
                                 reserve.setText("Already Reserved");
                                 reserve.setBackgroundColor(Color.GRAY);
                                 reserve.setOnClickListener(null);
                                 Log.d(TAG2,"Button Changed");
                                 break;
-                            }
+                            }*/
                         }
                     }
 

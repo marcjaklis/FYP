@@ -1,6 +1,7 @@
 package com.example.fypgymapp;
 
 import android.content.Intent;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,13 +28,38 @@ public class AdminSignUp extends AppCompatActivity {
     public String firstName;
     public String lastName;
     public EditText myCenterName;
-    public EditText myCenterLocation;
+    public Button myCenterLocation;
     public EditText myCenterDescription;
+    public Double latitude;
+    public Double longitude;
+
+
+
+
+    ///////////// For PlacePicker //////////////
+    final int PLACE_PICKER_REQUEST = 1;
+    PlacePicker.IntentBuilder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adminsignup);
+
+        myCenterLocation = (Button) findViewById(R.id.centerLocation);
+        /*myCenterDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder = new PlacePicker.IntentBuilder();
+                try {
+                    startActivityForResult(builder.build(AdminSignUp.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });*/
 
         adminButton = (Button) findViewById(R.id.adminButton);
         adminButton.setOnClickListener(new View.OnClickListener() {
@@ -40,14 +71,6 @@ public class AdminSignUp extends AppCompatActivity {
                 fitnessCenterName = myCenterName.getText().toString();
                 if(TextUtils.isEmpty(fitnessCenterName)) {
                     myCenterName.setError("Required");
-                    return;
-                }
-
-                ////////////// Location ///////////////
-                myCenterLocation = (EditText) findViewById(R.id.centerLocation);
-                location = myCenterLocation.getText().toString();
-                if(TextUtils.isEmpty(location)) {
-                    myCenterLocation.setError("Required");
                     return;
                 }
 
@@ -65,8 +88,8 @@ public class AdminSignUp extends AppCompatActivity {
                     lastName = extras.getString("LastName");
                 }
 
-                ////////////// Upload to Firebase ///////
-                AdminUser adminUser = new AdminUser(UID, firstName, lastName, fitnessCenterName, location, description, 0);
+
+                AdminUser adminUser = new AdminUser(UID, firstName, lastName, fitnessCenterName, 33.888630,35.495480, location, description, 0);
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance()
                         .getReference("adminUsers");
@@ -79,6 +102,21 @@ public class AdminSignUp extends AppCompatActivity {
             }
         });
     }
+
+    /*
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                LatLng coords = place.getLatLng();
+                latitude = coords.latitude;
+                longitude = coords.longitude;
+                location = place.getName().toString();
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+        }
+    }*/
 
 
 }

@@ -33,7 +33,6 @@
         android:id="@+id/centerName"
         android:layout_width="256dp"
         android:layout_height="37dp"
-        android:ems="12"
         android:inputType="textPersonName"
         tools:background="@android:color/white"
         tools:layout_editor_absoluteY="104dp"
@@ -50,13 +49,12 @@
         android:layout_below="@+id/centerName"
         android:layout_alignStart="@+id/centerName" />
 
-    <EditText
+    <Button
         android:id="@+id/centerLocation"
-        android:layout_width="256dp"
+        android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:ems="12"
-        android:inputType="textPersonName"
-        tools:background="@android:color/white"
+        android:text="Get Location From Map"
         tools:layout_editor_absoluteY="104dp"
         android:layout_below="@+id/textView3"
         android:layout_alignStart="@+id/textView3" />

@@ -24,12 +24,12 @@
 
     <ImageButton
         android:id="@+id/yogabest"
-        android:layout_width="340dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="170dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="31dp"
+        android:adjustViewBounds="true"
         android:layout_below="@+id/categories"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true" />
+        android:layout_alignStart="@+id/categories" />
 
 
     <ImageButton
@@ -40,5 +40,13 @@
         android:layout_below="@+id/yogabest"
         android:layout_alignStart="@+id/yogabest"
         android:adjustViewBounds="true" />
+
+    <ImageButton
+        android:id="@+id/recommended"
+        android:layout_width="170dp"
+        android:layout_height="145dp"
+        android:adjustViewBounds="true"
+        android:layout_above="@+id/topgyms"
+        android:layout_toEndOf="@+id/yogabest" />
 
 </RelativeLayout>
